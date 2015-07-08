@@ -273,18 +273,21 @@ class LegacyStorage extends Gateway
      */
     protected function buildBlockItem( array $row )
     {
-        return new Item(
-            array(
-                'blockId'           => $row['block_id'],
-                'contentId'         => (int)$row['object_id'],
-                'locationId'        => (int)$row['node_id'],
-                'priority'          => (int)$row['priority'],
-                'publicationDate'   => new DateTime( "@{$row['ts_publication']}" ),
-                'visibilityDate'    => $row['ts_visible'] ? new DateTime( "@{$row['ts_visible']}" ) : null,
-                'hiddenDate'        => $row['ts_hidden'] ? new DateTime( "@{$row['ts_hidden']}" ) : null,
-                'rotationUntilDate' => $row['rotation_until'] ? new DateTime( "@{$row['rotation_until']}" ) : null,
-                'movedTo'           => $row['moved_to']
-            )
+        $properties = array(
+            'blockId'           => $row['block_id'],
+            'contentId'         => (int)$row['object_id'],
+            'locationId'        => (int)$row['node_id'],
+            'priority'          => (int)$row['priority'],
+            'publicationDate'   => new DateTime( "@{$row['ts_publication']}" ),
+            'visibilityDate'    => $row['ts_visible'] ? new DateTime( "@{$row['ts_visible']}" ) : null,
+            'hiddenDate'        => $row['ts_hidden'] ? new DateTime( "@{$row['ts_hidden']}" ) : null,
+            'rotationUntilDate' => $row['rotation_until'] ? new DateTime( "@{$row['rotation_until']}" ) : null,
+            'movedTo'           => $row['moved_to']
         );
+        if (isset($row['width']) && isset($row['height'])) {
+            $properties['width'] = (int)$row['width'];
+            $properties['height'] = (int)$row['height'];
+        }
+        return new Item($properties);
     }
 }
