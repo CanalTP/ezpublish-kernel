@@ -51,7 +51,7 @@ class Block extends Base
     /**
      * @var array
      */
-    protected $customAttributes;
+    protected $customAttributes = array();
 
     /**
      * @see \eZ\Publish\Core\FieldType\Page\Parts\Base for ACTION_* constants
@@ -74,4 +74,14 @@ class Block extends Base
      * @var \eZ\Publish\Core\FieldType\Page\Parts\Item[]
      */
     protected $items = array();
+
+    public function setCustomAttributes(array $customAttributes)
+    {
+        $this->customAttributes = $customAttributes;
+    }
+
+    public function getCustomAttributes()
+    {
+        return $this->customAttributes;
+    }
 }
