@@ -43,6 +43,13 @@ class Zone extends Base
     protected $identifier;
 
     /**
+     * Custom attributes
+     *
+     * @var array
+     */
+    protected $customAttributes;
+
+    /**
      * @see \eZ\Publish\Core\FieldType\Page\Parts\Base for ACTION_* constants
      *
      * @var string
@@ -57,5 +64,16 @@ class Zone extends Base
         {
             $this->blocksById[$block->id] = $block;
         }
+        $this->customAttributes = array();
+    }
+
+    public function setCustomAttributes(array $customAttributes)
+    {
+        $this->customAttributes = $customAttributes;
+    }
+
+    public function getCustomAttributes()
+    {
+        return $this->customAttributes;
     }
 }
