@@ -49,13 +49,31 @@ class Zone extends Base
      */
     protected $action;
 
-    public function __construct( array $properties = array() )
-    {
-        parent::__construct( $properties );
+    /**
+     * Custom attributes
+     *
+     * @var array
+     */
+    protected $customAttributes;
 
-        foreach ( $this->blocks as $block )
-        {
+    public function __construct(array $properties = array())
+    {
+        parent::__construct($properties);
+
+        foreach ($this->blocks as $block) {
             $this->blocksById[$block->id] = $block;
         }
+
+        $this->customAttributes = array();
+    }
+
+    public function setCustomAttributes(array $customAttributes)
+    {
+        $this->customAttributes = $customAttributes;
+    }
+
+    public function getCustomAttributes()
+    {
+        return $this->customAttributes;
     }
 }
